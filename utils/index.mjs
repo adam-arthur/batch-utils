@@ -8,7 +8,7 @@ export {
 }
 
 function findFilesWithContent({ textToMatch }) {
-    const filesWithContent = execSync(`grep -rnwl "." -e "${textToMatch}"`, { encoding: 'utf-8' })
+    const filesWithContent = execSync(`grep -rl -e "${textToMatch}" .`, { encoding: 'utf-8' })
     return filesWithContent.split('\n').slice(0, -1).map(v => path.resolve(v))
 }
 
