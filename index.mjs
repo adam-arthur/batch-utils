@@ -1,16 +1,22 @@
-import { findFilesWithContent } from './utils/index.mjs'
+import { findFilesWithContent, renameFiles } from './utils/index.mjs'
 
 // export{}
 main()
 
 async function main() {
-    console.log(
-        findFilesWithContent({
+    const filePaths = findFilesWithContent({
             textToMatch: 'spyOn('
         })
-    )
-    // const filesToRename = []
-    // for (const file of filesToRename) {
-        
-    // }
+
+    renameFiles({
+        filePaths,
+        getNewFileName(filename) {
+            console.log(filename)
+            if (!filename.includes('.spec.')) {
+                return
+            }
+
+            return filename.replace('.spec.', '.disabledspec.')
+        }
+    })
 }

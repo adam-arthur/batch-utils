@@ -16,9 +16,10 @@ async function renameFiles({ filePaths, getNewFileName }) {
     for (const filePath of filePaths) {
         const newFileName = getNewFileName(filePath)
         if (!newFileName) {
-            console.log('Skipped ', filePath, ' due to falsy new filename')
+            console.log(`Skipped "${filePath}" due to falsy new filename`)
+            continue
         }
         await fs.rename(filePath, newFileName)
-        console.log('Renamed ', filePath, ' to ', newFileName)
+        console.log(`Renamed "${filePath}" to ${newFileName}`)
     }
 }
